@@ -1,0 +1,14 @@
+<configuration scan="true">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-12.12t] %-5p %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+    <logger name="org.optaplanner" level="debug"/>
+    <logger name="org.optaplanner.examples.curriculumcourse" level="debug"/>
+</configuration>

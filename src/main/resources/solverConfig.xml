@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver
+        xmlns="https://www.optaplanner.org/xsd/solver"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.optaplanner.org/xsd/solver https://www.optaplanner.org/xsd/solver/solver.xsd">
+
+  <moveThreadCount>AUTO</moveThreadCount>
+
+  <solutionClass>org.optaplanner.examples.curriculumcourse.domain.CourseSchedule</solutionClass>
+  <entityClass>org.optaplanner.examples.curriculumcourse.domain.Lecture</entityClass>
+
+  <scoreDirectorFactory>
+    <constraintProviderClass>
+      org.optaplanner.examples.curriculumcourse.score.CurriculumCourseConstraintProvider
+    </constraintProviderClass>
+  </scoreDirectorFactory>
+
+  <termination>
+    <minutesSpentLimit>20</minutesSpentLimit>
+  </termination>
+
+  <constructionHeuristic>
+    <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>
+  </constructionHeuristic>
+
+  <localSearch>
+    <localSearchType>HILL_CLIMBING</localSearchType>
+
+    <unionMoveSelector>
+      <changeMoveSelector/>
+      <swapMoveSelector>
+        <filterClass>org.optaplanner.examples.curriculumcourse.solver.move.DifferentCourseSwapMoveFilter</filterClass>
+      </swapMoveSelector>
+    </unionMoveSelector>
+  </localSearch>
+</solver>
