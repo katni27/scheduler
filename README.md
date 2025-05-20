@@ -65,18 +65,13 @@ Java 17 | Maven 3 | OptaPlanner 9.44
 
 ## Сборка и запуск
 
-### Вариант 1 – fat‑jar
+### без jar (Maven exec)
 
 ```bash
 cd scheduler
-mvn -q clean package
-java -jar target/scheduler-1.0.jar schedule.json src/main/resources/solverConfig.xml
-```
 
-### Вариант 2 – без jar (Maven exec)
-
-```bash
 mvn -q compile exec:java \
-  -Dexec.mainClass=org.optaplanner.examples.curriculumcourse.app.SchedulerApp \
-  -Dexec.args="schedule.json src/main/resources/solverConfig.xml"
+    -Dexec.mainClass=org.optaplanner.examples.curriculumcourse.app.SchedulerApp \
+    -Dexec.jvmArgs="-DmoveThreadCount=AUTO" \
+    -Dexec.args="src/main/resources/schedule.json src/main/resources/solverConfig.xml"
 ```
