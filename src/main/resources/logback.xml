@@ -1,14 +1,45 @@
-<configuration scan="true">
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%-12.12t] %-5p %m%n</pattern>
-        </encoder>
-    </appender>
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
 
-    <root level="info">
-        <appender-ref ref="CONSOLE"/>
-    </root>
+  <!-- Консольный аппендер -->
+  <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%-12.12t] %-5p %m%n</pattern>
+    </encoder>
+  </appender>
 
-    <logger name="org.optaplanner" level="debug"/>
-    <logger name="org.optaplanner.examples.curriculumcourse" level="debug"/>
+  <!-- Апендер для записи в файл с прокруткой (роллинг) по размеру -->
+  <appender name="fileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!-- Путь к основному логу -->
+    <file>local/log/optaplanner.log</file>
+
+    <!-- Политика "прокрутки" (роллинг) файлов по размеру.
+         При достижении максимального размера создаётся следующий лог, а старый архивируется. -->
+  <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+    <fileNamePattern>local/log/optaplanner.%i.log.zip</fileNamePattern>
+    <totalSizeCap>10GB</totalSizeCap>
+    <minIndex>1</minIndex>
+    <maxIndex>10</maxIndex>
+  </rollingPolicy>
+
+  <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+    <maxFileSize>1GB</maxFileSize>
+  </triggeringPolicy>
+
+  <encoder>
+    <pattern>%d{HH:mm:ss.SSS} [%t] %-5p %m%n</pattern>
+  </encoder>
+</appender>
+
+<!-- Логгер для OptaPlanner с уровнем по умолчанию debug.
+     Можно переопределять через VM-параметр:
+     -Dlogback.level.org.optaplanner=trace -->
+  <logger name="org.optaplanner" level="${logback.level.org.optaplanner:-debug}"/>
+
+  <!-- Корневой логгер -->
+  <root level="warn">
+    <appender-ref ref="consoleAppender" />
+    <appender-ref ref="fileAppender" />
+  </root>
+
 </configuration>
