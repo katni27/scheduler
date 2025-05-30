@@ -56,6 +56,17 @@
 
   <build>
     <plugins>
+      <!-- Плагин компиляции с указанием Java 17 -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+
+      <!-- Плагин сборки uber-jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
