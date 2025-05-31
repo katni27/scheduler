@@ -16,7 +16,7 @@ import org.optaplanner.examples.curriculumcourse.domain.solver.CourseConflict;
 
 public class CurriculumCourseConstraintProvider implements ConstraintProvider {
 
-    private static final int MAX_LECTURES_PER_DAY = 4;
+    private static final int MAX_LECTURES_PER_DAY = 5;
 
     @Override
     public Constraint[] defineConstraints(ConstraintFactory factory) {
