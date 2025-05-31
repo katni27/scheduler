@@ -17,7 +17,6 @@
          При достижении максимального размера создаётся следующий лог, а старый архивируется. -->
   <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
     <fileNamePattern>local/log/optaplanner.%i.log.zip</fileNamePattern>
-    <totalSizeCap>10GB</totalSizeCap>
     <minIndex>1</minIndex>
     <maxIndex>10</maxIndex>
   </rollingPolicy>
